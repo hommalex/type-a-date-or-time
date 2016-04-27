@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="alex-date-time.min.js"></script>
+	<style>
+		input[type=text] {
+			background-color: #e5e5e5;
+			border: solid 1px green;
+		}
+	</style>
+</head>
+<body>
+	<h1>Date/Time Type</h1>
+	<input type="text" id="date1" >
+	<input type="text" id="time1" >
+	<script>
+	$(document).ready( function() {
+		$("#sss").unbind("keydown").keydown( function(e) { var thisk = e.keyCode || e.which; console.log(e.keyCode)});
+		$("#date1").typeADate();
+		$("#time1").typeATime();
+
+	});
+	
+
+	</script>
+</body>
+</html>

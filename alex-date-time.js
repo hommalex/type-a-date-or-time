@@ -9,10 +9,11 @@ $.fn.typeADate = function() {
 	
 	thisob.val("DD/MM/YYYY");
 	
+	var reg = /(0[1-9]|[12][0-9]|3[01]|DD)[\/](0[1-9]|1[012]|MM)[\/](19[0-9][0-9]|20[0-9][0-9]|YYYY)/;
+	
 	thisob.next().on("click touchstart", function() {
 		thisob.focus();
 
-		var reg = /(0[1-9]|[12][0-9]|3[01]|DD)[\/](0[1-9]|1[012]|MM)[\/](19[0-9][0-9]|20[0-9][0-9]|YYYY)/;
 		if (reg.test(thisob.val()) === false) { thisob.val("DD/MM/YYYY"); }
 		
 		setTimeout( function() { thisob.get(0).setSelectionRange(0,1); }, 0);
@@ -37,9 +38,11 @@ $.fn.typeADate = function() {
 				
 			} else if (thisk == 8) {
 				e.preventDefault();
-				if (init.keypress == 3 || init.keypress == 6) { init.keypress--; }
-				init.keypress--;
-				setTimeout( function() { thisob.get(0).setSelectionRange(init.keypress,init.keypress+1); }, 30);
+				if (init.keypress> 0) {
+					if (init.keypress == 3 || init.keypress == 6) { init.keypress--; }
+					init.keypress--;
+					setTimeout( function() { thisob.get(0).setSelectionRange(init.keypress,init.keypress+1); }, 30);
+				}
 
 			} else { 
 				e.preventDefault();
@@ -47,7 +50,6 @@ $.fn.typeADate = function() {
 		});
 	});
 	thisob.blur( function() {
-		var reg = /(0[1-9]|[12][0-9]|3[01]|DD)[\/](0[1-9]|1[012]|MM)[\/](19[0-9][0-9]|20[0-9][0-9]|YYYY)/;
 		if (reg.test(thisob.val()) === false) { thisob.css({"border-color": "#E04427", "background-color": "#EDD7D3"}) }
 	});
 }
@@ -60,9 +62,10 @@ $.fn.typeATime = function() {
 	
 	thisob.val("HH:MM");
 	
+	var reg = /(0[0-9]|1[0-9]|2[0-3]|HH)[:](0[0-9]|[1-5][0-9]|HH)/;
+	
 	thisob.next().on("click touchstart", function() {
 		thisob.focus();
-		var reg = /(0[0-9]|1[0-9]|2[0-3]|HH)[:](0[0-9]|[1-5][0-9]|HH)/;
 		if (reg.test(thisob.val()) === false) { thisob.val("HH:MM"); }
 		setTimeout( function() { thisob.get(0).setSelectionRange(0,1); }, 10);
 		init = {keypress:0};
@@ -83,16 +86,17 @@ $.fn.typeATime = function() {
 				}
 			} else if (thisk == 8) {
 				e.preventDefault();
-				if (init.keypress == 3) { init.keypress--; }
-				init.keypress--;
-				setTimeout( function() { thisob.get(0).setSelectionRange(init.keypress,init.keypress+1); }, 30);
+				if (init.keypress> 0) {
+					if (init.keypress == 3) { init.keypress--; }
+					init.keypress--;
+					setTimeout( function() { thisob.get(0).setSelectionRange(init.keypress,init.keypress+1); }, 30);
+				}
 
 			} else { 
 				e.preventDefault();
 			}
 		}).keyup( function() { var thisval = thisob.val(); if (thisval.length > 5) { var newval = thisval.substr(0,5); thisob.val(newval); } });
 		thisob.blur( function() {
-		var reg = /(0[0-9]|1[0-9]|2[0-3]|HH)[:](0[0-9]|[1-5][0-9]|HH)/;
 		if (reg.test(thisob.val()) === false) { thisob.css({"border-color": "#E04427", "background-color": "#EDD7D3"}) }
 	});
 	});
